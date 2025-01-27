@@ -4,6 +4,8 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@
 interface Column<T> {
     header: string;
     accessorKey: keyof T;
+    additionalClass?: string;
+    headerClasses?: string;
     cell?: (item: T) => React.ReactNode;
 }
 
@@ -29,20 +31,18 @@ export function DataTable<T>({ data, columns, isLoading, error }: DataTableProps
                 <TableHeader>
                     <TableRow>
                         {columns.map((column) => (
-                            <TableHead key={String(column.accessorKey)}>
+                            <TableHead key={String(column.accessorKey)} className={column.headerClasses}>
                                 {column.header}
                             </TableHead>
                         ))}
                     </TableRow>
                 </TableHeader>
                 <TableBody>
-                    {data.map((item, index) => (
-                        <TableRow key={index}>
+                    {data.map((item, rowIndex) => (
+                        <TableRow key={rowIndex}>
                             {columns.map((column) => (
-                                <TableCell key={String(column.accessorKey)}>
-                                    {column.cell 
-                                        ? column.cell(item)
-                                        : String(item[column.accessorKey])}
+                                <TableCell key={String(column.accessorKey)} className={column.additionalClass}>
+                                    {column.cell ? column.cell(item) : String(item[column.accessorKey])}
                                 </TableCell>
                             ))}
                         </TableRow>
@@ -51,4 +51,4 @@ export function DataTable<T>({ data, columns, isLoading, error }: DataTableProps
             </Table>
         </div>
     );
-} 
+}

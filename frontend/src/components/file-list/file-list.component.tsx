@@ -71,9 +71,10 @@ export function FileList() {
         },
         {
             header: "Actions",
+            headerClasses: "text-center",
             accessorKey: "id" as keyof File,
             cell: (file: File) => (
-                <div className="flex items-center space-x-2">
+                <div className="flex items-center justify-center space-x-2">
                     <Button
                         variant="ghost"
                         size="icon"

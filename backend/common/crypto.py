@@ -69,50 +69,40 @@ def encrypt_file(file_id, file_path):
     except Exception as e:
         raise CryptoError(f"Encryption failed: {str(e)}")
 
-def decrypt_file(file_id, file_path):
-    """
-    Decrypt a file using AES-256-GCM
-    """
-    print("Decrypt called with ID:", file_id)  # Add this debug print
-    print("Decrypt called with path:", file_path)  # Add this debug print
-    
-    # Get key
-    try:
-        key = get_encryption_key(file_id)
-        print("Retrieved key for ID:", file_id)  # Add this debug print
-    except Exception as e:
-        print("Error getting key:", str(e))  # Add this debug print
-        raise
-        
+def decrypt_file(file_id, file_path, temp_output_path=None, vault_client=None):
+    """Decrypt a file using AES-256-GCM"""
+    if vault_client is None:
+        vault_client = get_vault_client()
+
+    key = get_encryption_key(file_id)
     aesgcm = AESGCM(key)
-    
-    # Define temp_path outside try block
-    temp_path = f"{file_path}.tmp"
-    
+
     try:
-        # Read encrypted file
         with open(file_path, 'rb') as file:
             file_data = file.read()
-            print("Read file size:", len(file_data))  # Add this debug print
-        
-        # Extract nonce and ciphertext
-        nonce = file_data[:12]  # First 12 bytes
-        encrypted_data = file_data[12:]  # Rest is encrypted data
-        print("Nonce size:", len(nonce))  # Add this debug print
-        print("Encrypted data size:", len(encrypted_data))  # Add this debug print
-        
-        # File path as associated data for authentication
+
+        nonce = file_data[:12]
+        encrypted_data = file_data[12:]
         associated_data = file_path.encode()
-        
-        # Decrypt and verify
+
         decrypted_data = aesgcm.decrypt(nonce, encrypted_data, associated_data)
-        
-        # Write to temp file and replace
-        with open(temp_path, 'wb') as file:
+
+        # Determine where to write the decrypted data
+        if temp_output_path:
+            output_path = temp_output_path
+        else:
+            temp_path = f"{file_path}.tmp"
+            output_path = temp_path
+
+        # Write to the determined output path
+        with open(output_path, 'wb') as file:
             file.write(decrypted_data)
-        os.replace(temp_path, file_path)
-            
+
+        # If not using a temporary output path, replace the original file
+        if not temp_output_path:
+            os.replace(temp_path, file_path)
+
     except Exception as e:
-        if os.path.exists(temp_path):
-            os.remove(temp_path)
+        if not temp_output_path and os.path.exists(temp_path):
+            os.remove(temp_path)  # Clean up only if temp_path was used
         raise CryptoError(f"Decryption failed: {str(e)}")

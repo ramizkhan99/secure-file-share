@@ -24,7 +24,7 @@ export const ShareFileDialog: React.FC<ShareFileDialogProps> = ({ fileId, fileNa
 
             if (response.data.success) {
                 const shareId = response.data.data.id;
-                const fullLink = `${window.location.origin}/files/shared/${shareId}`;
+                const fullLink = `${window.location.origin}/shared/${shareId}`;
                 setShareLink(fullLink);
             }
         } catch (error) {
@@ -66,7 +66,7 @@ export const ShareFileDialog: React.FC<ShareFileDialogProps> = ({ fileId, fileNa
                     <DialogDescription className="mt-2 text-sm text-gray-400">
                         {shareLink ? 'Copy the link below to share the file:' : `Generate a shareable link for "${fileName}"`}
                     </DialogDescription>
-                    
+
                     {!shareLink ? (
                         <div className="mt-4 flex justify-end space-x-2">
                             <DialogClose asChild>

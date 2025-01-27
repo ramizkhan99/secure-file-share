@@ -5,6 +5,7 @@ import { EnableMFAPage, RegistrationPage } from "@/pages";
 import { VerifyMFAPage } from "./pages/verify-mfa.page";
 import { HomePage } from "./pages/home.page";
 import { UsersPage } from "./pages/users.page";
+import { ViewSharedFilePage } from '@/pages/view-shared-file.page';
 import { Toaster } from "./components/ui/toaster";
 
 const AppRouter: React.FC = () => {
@@ -17,6 +18,7 @@ const AppRouter: React.FC = () => {
         <Route path="/mfa/verify" element={<VerifyMFAPage />} />
         <Route path="/home" element={<HomePage />} />
         <Route path="/users" element={<UsersPage />} />
+        <Route path="/shared/:shareId" element={<ViewSharedFilePage />} />
       </Routes>
       <Toaster />
     </Router>

@@ -9,7 +9,7 @@ const Navbar: React.FC = () => {
     const isAdmin = useAppSelector(selectIsAdmin);
 
     return (
-        <NavigationMenu className="bg-gray-900 bg-opacity-70 backdrop-blur-md shadow-md">
+        <NavigationMenu className="w-full min-w-full top-0 left-0 bg-gray-900 bg-opacity-70 backdrop-blur-md shadow-md fixed">
             <NavigationMenuList className="flex justify-between items-center p-4">
                 <div className="left flex items-center space-x-4">
                     <NavigationMenuItem>
