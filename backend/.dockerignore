@@ -49,3 +49,6 @@ Dockerfile
 .coverage.*
 .pytest_cache/
 htmlcov/
+
+*.crt
+*.key

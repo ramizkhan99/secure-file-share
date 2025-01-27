@@ -25,6 +25,8 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Copy project
 COPY . .
 
-# Run migrations and start server
-# CMD ["sh", "-c", "python manage.py makemigrations && python manage.py migrate && python manage.py runserver_plus 0.0.0.0:8000 --cert-file localhost.crt --key-file localhost.key"]
-CMD ["gunicorn", "core.wsgi:application", "--bind", "0.0.0.0:8000", "--workers", "3", "--reload", "--certfile=localhost.crt", "--keyfile=localhost.key"]
+# Run migrations and start server (simplified to debug HTTPS separately)
+# CMD ["gunicorn", "core.wsgi:application", "--bind", "0.0.0.0:8000", "--workers", "3", "--certfile=/app/localhost.crt", "--keyfile=/app/localhost.key"]
+CMD ["gunicorn", "core.wsgi:application", "--bind", "0.0.0.0:8000", \
+    "--certfile=/app/certs/localhost.crt", \
+    "--keyfile=/app/certs/localhost.key"]

@@ -1,7 +1,7 @@
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import path from "path";
-import fs from "fs";
+// import fs from "fs";
 
 // https://vite.dev/config/
 export default defineConfig({
@@ -11,10 +11,11 @@ export default defineConfig({
       "@": path.resolve(__dirname, "./src"),
     },
   },
-  server: {
-    https: {
-      key: fs.readFileSync(path.resolve(__dirname, "./localhost.key")), // Path to your key file
-      cert: fs.readFileSync(path.resolve(__dirname, "./localhost.crt")),
-    },
-  },
+  // Use for running the server with https independent of nginx
+  // server: {
+  //   https: {
+  //     key: fs.readFileSync(`/app/certs/localhost.key`),
+  //     cert: fs.readFileSync(`/app/certs/localhost.crt`),
+  //   },
+  // },
 });

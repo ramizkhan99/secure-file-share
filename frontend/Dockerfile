@@ -7,13 +7,15 @@ ENV VITE_API_URL=https://localhost:8000
 WORKDIR /app
 
 # Copy package.json and package-lock.json
-COPY package.json package-lock.json ./
+COPY ./package.json ./
 
 # Install dependencies
 RUN npm install
 
 # Copy the rest of the application code
 COPY . .
+
+RUN sleep 10
 
 # Build the application
 RUN npm run build
@@ -23,4 +25,3 @@ EXPOSE 4173
 
 # Run the application
 CMD ["npm", "run", "dev", "--", "--host", "0.0.0.0", "--port", "4173"]
-
