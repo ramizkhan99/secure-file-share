@@ -1,0 +1,20 @@
+.file-list {
+    .actions {
+        .download-icon, .share-icon {
+            cursor: pointer;
+
+            &:hover {
+                color: var(--primary-color);
+            }
+        }
+
+        .trash-icon {
+            cursor: pointer;
+
+            &:hover {
+                color: red;
+            }
+        }
+    }
+    
+}

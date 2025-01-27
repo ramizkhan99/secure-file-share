@@ -1,0 +1,51 @@
+# Ignore Python bytecode files
+__pycache__/
+*.py[cod]
+
+# Ignore virtual environment directories
+.env/
+.venv/
+env/
+venv/
+ENV/
+
+# Ignore Django migration files
+migrations/
+
+# Ignore media files
+media/*
+
+# Ignore static files
+static/*
+
+# Ignore local settings
+local_settings.py
+
+# Ignore database files
+db.sqlite3
+db.sqlite3-journal
+
+# Ignore logs
+*.log
+
+# Ignore .mypy_cache directory
+.mypy_cache/
+
+# Ignore .vscode directory
+.vscode/
+
+# Ignore .env file
+.env
+
+# Ignore Dockerfile
+Dockerfile
+
+# Ignore .git directory and files
+.git/
+.gitignore
+
+# Ignore coverage and testing files
+.coverage
+.coverage.*
+.pytest_cache/
+htmlcov/

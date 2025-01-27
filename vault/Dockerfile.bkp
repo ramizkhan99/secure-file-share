@@ -1,0 +1,21 @@
+FROM hashicorp/vault:latest
+
+# Create necessary directories
+RUN mkdir -p /vault/logs /vault/data /vault/config
+
+# Copy configuration files (Ensure these files exist in your 'config' directory)
+COPY config/config.hcl /vault/config/config.hcl
+
+# Set permissions
+RUN chown -R vault:vault /vault/logs /vault/data /vault/config
+
+# Set the Vault configuration directory
+ENV VAULT_CONFIG_DIR=/vault/config
+ENV VAULT_DEV_ROOT_TOKEN_ID=root
+ENV VAULT_DEV_LISTEN_ADDRESS=0.0.0.0:8200
+
+# Expose Vault's default port
+EXPOSE 8200
+
+# Start Vault server with the custom config
+CMD ["vault", "server", "-config=/vault/config/config.hcl", "&&", "vault", "operator", "init", "&&", "vault", "operator", "unseal"]
