@@ -1,25 +1,15 @@
 version: '3.8'
 
 services:
-  # init-certs:
-  #   build:
-  #     context: ./init-certs
-  #     dockerfile: Dockerfile
-  #   volumes:
-  #     - certs:/app/certs
-
   backend:
     build: ./backend
     volumes:
-      - ./backend:/app
+      - ./backend:/app:rw
       - ./backend/media:/app/media
-      - ./backend/db.sqlite3:/app/db.sqlite3
-      - ./certs:/app/certs:ro
     ports:
       - "8000:8000"
     depends_on:
       - vault
-      # - init-certs
 
   frontend:
     build: ./frontend
@@ -28,11 +18,6 @@ services:
     volumes:
       - ./frontend:/app:delegated
       - /app/node_modules
-      # - ./certs:/app/certs:ro
-      # environment:
-      # - VITE_API_URL=https://localhost
-      # depends_on:
-      # - init-certs
 
   vault:
     build:
