@@ -1,7 +1,7 @@
 # Use an official Node.js 22 image as the base image
 FROM node:22
 
-ENV VITE_API_URL=http://localhost:8000
+ENV VITE_API_URL=/api
 
 # Set the working directory in the container
 WORKDIR /app
@@ -14,8 +14,6 @@ RUN npm install
 
 # Copy the rest of the application code
 COPY . .
-
-RUN sleep 10
 
 # Build the application
 RUN npm run build

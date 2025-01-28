@@ -14,7 +14,7 @@ class JWTRefreshMiddleware:
                 request.new_access_token,
                 httponly=True,
                 secure=True,
-                samesite='Strict',
+                samesite='None',
                 max_age=settings.JWT_EXPIRATION_TIME
             )
         

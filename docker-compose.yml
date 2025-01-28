@@ -49,5 +49,12 @@ services:
     environment:
       VAULT_TOKEN: ${VAULT_DEV_ROOT_TOKEN_ID}
       VAULT_ADDR: 'http://0.0.0.0:8200'
-  # volumes:
-  # certs:
+
+  nginx:
+    build: ./nginx
+    ports:
+      - "80:80"
+      - "443:443"
+    depends_on:
+      - backend
+      - frontend
