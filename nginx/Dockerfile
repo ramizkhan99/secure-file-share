@@ -1,23 +1,13 @@
-# nginx/Dockerfile
-
 FROM nginx:latest
 
-# Create the SSL directory
-RUN mkdir -p /etc/nginx/ssl
+# Copy Nginx configuration
+COPY nginx.conf /etc/nginx/conf.d/default.conf
 
-# Copy the script to generate SSL certificates
-COPY ./generate_ssl.sh /etc/nginx/ssl/
+# Copy the certificate generation script
+COPY generate_cert.sh /generate_cert.sh
 
-# Copy the Nginx configuration
-COPY ./nginx.conf /etc/nginx/
+# Make the script executable
+RUN chmod +x /generate_cert.sh
 
-# Run the script to generate certificates
-RUN chmod 700 /etc/nginx/ssl/generate_ssl.sh
-RUN /etc/nginx/ssl/generate_ssl.sh
-
-# Expose ports
-EXPOSE 80
-EXPOSE 443
-
-# Start Nginx
-CMD ["nginx", "-g", "daemon off;"]
+# Use entry point to generate the certificate then start nginx
+ENTRYPOINT ["/bin/bash", "-c", "/generate_cert.sh && nginx -g 'daemon off;'"]

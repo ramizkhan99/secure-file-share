@@ -69,9 +69,8 @@ CORS_ALLOWED_ORIGINS = [
     'https://localhost:4173/',
     'http://localhost:5173/',
     'http://localhost:4173/',
+    'https://localhost'
 ]
-
-CORS_ALLOW_ALL_ORIGINS = True
 
 CORS_ALLOW_CREDENTIALS = True
 
@@ -92,6 +91,12 @@ CORS_ALLOW_HEADERS = [
 ]
 
 ROOT_URLCONF = 'core.urls'
+
+# for nginx
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+SESSION_COOKIE_DOMAIN = 'localhost'  # Note the leading dot for subdomains
+CSRF_COOKIE_DOMAIN = 'localhost'
+USE_X_FORWARDED_HOST = True
 
 SESSION_COOKIE_SECURE = True
 CSRF_COOKIE_SECURE = True

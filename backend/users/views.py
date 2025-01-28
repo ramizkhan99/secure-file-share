@@ -36,7 +36,7 @@ class UserViewSet(viewsets.ModelViewSet):
                     token[0],
                     httponly=True,
                     secure=True,
-                    samesite='Strict',
+                    samesite='None',
                     max_age=settings.JWT_EXPIRATION_TIME  # Add max_age to match JWT expiration
                 )
                 response.set_cookie(
@@ -44,7 +44,7 @@ class UserViewSet(viewsets.ModelViewSet):
                     token[1],
                     httponly=True,
                     secure=True,
-                    samesite='Strict',
+                    samesite='None',
                     max_age=settings.JWT_REFRESH_EXPIRATION_TIME
                 )
                 return response
@@ -87,7 +87,7 @@ def login(request):
                 temp_token,
                 httponly=True,
                 secure=True,
-                samesite='Strict',
+                samesite='None',
                 max_age=300  # 5 minutes
             )
             return response
@@ -110,7 +110,7 @@ def login(request):
                 access_token,
                 httponly=True,
                 secure=True,
-                samesite='Strict',
+                samesite='None',
                 max_age=settings.JWT_EXPIRATION_TIME
             )
             response.set_cookie(
@@ -118,7 +118,7 @@ def login(request):
                 refresh_token,
                 httponly=True,
                 secure=True,
-                samesite='Strict',
+                samesite='None',
                 max_age=settings.JWT_REFRESH_EXPIRATION_TIME
             )
             return response
@@ -194,7 +194,7 @@ def verify_mfa(request):
         access_token,
         httponly=True,
         secure=True,
-        samesite='Strict',
+        samesite='None',
         max_age=settings.JWT_EXPIRATION_TIME
     )
     response.set_cookie(
@@ -202,7 +202,7 @@ def verify_mfa(request):
         refresh_token,
         httponly=True,
         secure=True,
-        samesite='Strict',
+        samesite='None',
         max_age=settings.JWT_REFRESH_EXPIRATION_TIME
     )
     return response
@@ -259,7 +259,7 @@ def enable_mfa(request):
         temp_token,
         httponly=True,
         secure=True,
-        samesite='Strict',
+        samesite='None',
         max_age=300  # 5 minutes
     )
     

@@ -1,7 +1,7 @@
 import axios, { AxiosRequestConfig, AxiosResponse } from "axios";
 
 export class Api {
-  private static apiUrl = (import.meta.env.VITE_API_URL as string) + "/api";
+  private static apiUrl = import.meta.env.VITE_API_URL as string;
 
   public static async delete(path: string, config?: AxiosRequestConfig) {
     const response = await axios.delete(`${Api.apiUrl}/${path}`, config);
