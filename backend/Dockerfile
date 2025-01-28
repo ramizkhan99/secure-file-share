@@ -27,7 +27,7 @@ COPY . .
 
 # Run migrations and start server (simplified to debug HTTPS separately)
 # CMD ["gunicorn", "core.wsgi:application", "--bind", "0.0.0.0:8000", "--workers", "3", "--certfile=/app/localhost.crt", "--keyfile=/app/localhost.key"]
-CMD ["gunicorn", "core.wsgi:application", "--bind", "0.0.0.0:8000", "--workers", "3", "--reload"]
+# CMD ["gunicorn", "core.wsgi:application", "--bind", "0.0.0.0:8000", "--workers", "3", "--reload"]
 # CMD ["gunicorn", "core.wsgi:application", "--bind", "0.0.0.0:8000", "--workers", "3", \
 #     "--certfile=/app/cert.pem", \
 #     "--keyfile=/app/key.pem"]

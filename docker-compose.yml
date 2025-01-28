@@ -3,6 +3,8 @@ version: '3.8'
 services:
   backend:
     build: ./backend
+    entrypoint: /app/entrypoint.sh
+    command: gunicorn core.wsgi:application --workers 3 --bind 0.0.0.0:8000
     volumes:
       - ./backend:/app:rw
       - ./backend/media:/app/media
