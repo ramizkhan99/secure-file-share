@@ -1,7 +1,7 @@
 # Use an official Node.js 22 image as the base image
 FROM node:22
 
-ENV VITE_API_URL=https://localhost:8000
+ENV VITE_API_URL=http://localhost:8000
 
 # Set the working directory in the container
 WORKDIR /app
@@ -10,7 +10,7 @@ WORKDIR /app
 COPY ./package.json ./
 
 # Install dependencies
-RUN npm install -f
+RUN npm install
 
 # Copy the rest of the application code
 COPY . .

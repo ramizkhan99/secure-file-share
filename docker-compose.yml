@@ -24,11 +24,11 @@ services:
   frontend:
     build: ./frontend
     ports:
-      - "4713:4173"
+      - "4173:4173"
     volumes:
       - ./frontend:/app:delegated
       - /app/node_modules
-      - ./certs:/app/certs:ro
+      # - ./certs:/app/certs:ro
       # environment:
       # - VITE_API_URL=https://localhost
       # depends_on:

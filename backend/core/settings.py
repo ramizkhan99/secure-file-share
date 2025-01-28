@@ -67,6 +67,8 @@ MIDDLEWARE = [
 CORS_ALLOWED_ORIGINS = [
     'https://localhost:5173/',
     'https://localhost:4173/',
+    'http://localhost:5173/',
+    'http://localhost:4173/',
 ]
 
 CORS_ALLOW_ALL_ORIGINS = True
@@ -113,10 +115,10 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'core.wsgi.application'
 
-SECURE_SSL_REDIRECT = os.getenv('PHASE') == 'production'
-SECURE_HSTS_SECONDS = 31536000  # 1 year
-SECURE_HSTS_INCLUDE_SUBDOMAINS = True
-SECURE_HSTS_PRELOAD = True
+# SECURE_SSL_REDIRECT = os.getenv('PHASE') == 'production'
+# SECURE_HSTS_SECONDS = 31536000  # 1 year
+# SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+# SECURE_HSTS_PRELOAD = True
 
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
