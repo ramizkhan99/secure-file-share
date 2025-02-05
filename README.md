@@ -12,3 +12,8 @@ Admins can do the same for all available files.
 - Files are encrypted at rest using AES-GCM
 - Role based access implemented
 - Implemented TLS/SSL (currently not working as nginx config broke, will update it soon)
+- MFA supported
+- Uses Vault for storage of encryption key
+
+> [!CAUTION]
+> This application not at all production ready. The TLS certificate is generated and self-signed and the Hashicorp vault image is used in development mode. Even the frontend is started in development mode.
